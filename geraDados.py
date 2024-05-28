@@ -19,6 +19,8 @@ def gerar_json():
 
     # Gerar dados JSON e escrever em um único arquivo
     with open(filename, "w") as outfile:
+        outfile.write("{ " + "\n")
+        outfile.write('"clients"' + ":[" + "\n")
         for i in range(int(quantidade_entry.get())):
             nome = faker.name()
             email = faker.email()
@@ -32,7 +34,11 @@ def gerar_json():
                          pais=pais)
 
             json_data = json.dumps(dados, indent=4)
-            outfile.write(json_data + "\n")  # Adicionar quebra de linha após cada registro
+            #outfile.write('"client"' + ":")
+            outfile.write(json_data)  # Adicionar quebra de linha após cada registro
+            outfile.write("," + "\n")  # Adicionar quebra de linha após cada registro
+        outfile.write("]" + "\n")
+        outfile.write("}" + "\n")
 
     # Exibir mensagem de sucesso
     status_label.config(text=f"Dados JSON salvos em: {save_dir} {filename}")
